@@ -36,7 +36,7 @@ enum planck_layers {
   _SYM,
   _SYM_OVLY,
   _NUM,
-  _NUM_OVLY
+  _NUM_OVLY,
   _ADJUST
 };
 
@@ -45,10 +45,10 @@ enum planck_keycodes {
   BACKLIT,
 };
 
-#define LOWER MO(_LOWER)
-#define RAISE MO(_RAISE)
-// #define SYM MO(_SYM)
-// #define NUM MO(_NUM)
+// #define LOWER MO(_LOWER)
+// #define RAISE MO(_RAISE)
+#define SYMLYR LT(_SYM,KC_LEFT)
+#define NUMLYR LT(_NUM,KC_ESC)
 #define SYMOVLY MO(_SYM_OVLY)
 #define NUMOVLY MO(_NUM_OVLY)
 
@@ -73,10 +73,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADNW_PUQ] = LAYOUT_planck_grid(
-    OSM(MOD_LCTL | MOD_LALT), DE_P,    DE_U,    OSL(_UMLAUT),    DE_COMM,              DE_Q,    DE_G,   DE_C,                DE_L,             DE_M,    DE_F,  OSM(MOD_RCTL | MOD_RGUI),
-    OSM(MOD_LSFT | MOD_LALT), DE_H,    DE_I,    DE_E,            DE_A,                 DE_O,    DE_D,   DE_T,                DE_R,             DE_N,    DE_S,  OSM(MOD_RSFT | MOD_RGUI),
-    OSM(MOD_LSFT),            DE_K,    DE_Y,    DE_DOT,          DE_QUOT,              DE_X,    DE_J,   DE_V,                DE_W,             DE_B,    DE_Z,  OSM(MOD_RCTL | MOD_RSFT),
-    OSM(MOD_LCTL),            KC_LGUI, KC_LALT, LT(_NUM,KC_ESC), MT(MOD_LSFT,KC_BSPC), KC_TAB,  KC_ENT, MT(MOD_RSFT,KC_SPC), LT(_SYM,KC_LEFT), KC_DOWN, KC_UP, KC_RGHT
+    OSM(MOD_LCTL | MOD_LALT), DE_P,    DE_U,    OSL(_UMLAUT), DE_COMM,              DE_Q,    DE_G,   DE_C,                DE_L,   DE_M,    DE_F,  OSM(MOD_RCTL | MOD_RGUI),
+    OSM(MOD_LSFT | MOD_LALT), DE_H,    DE_I,    DE_E,         DE_A,                 DE_O,    DE_D,   DE_T,                DE_R,   DE_N,    DE_S,  OSM(MOD_RSFT | MOD_RGUI),
+    OSM(MOD_LSFT),            DE_K,    DE_Y,    DE_DOT,       DE_QUOT,              DE_X,    DE_J,   DE_V,                DE_W,   DE_B,    DE_Z,  OSM(MOD_RCTL | MOD_RSFT),
+    OSM(MOD_LCTL),            KC_LGUI, KC_LALT, NUMLYR,       MT(MOD_LSFT,KC_BSPC), KC_TAB,  KC_ENT, MT(MOD_RSFT,KC_SPC), SYMLYR, KC_DOWN, KC_UP, KC_RGHT
 ),
 
 
@@ -110,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |   .  |   |  |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_SYM] = LAYOUT_planck_grid
-    DE_EUR,  DE_LCBR, DE_BSLS, DE_ASTR, DE_AMPR, DE_RCBR, _______, _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,
-    DE_ESC,  DE_LPRN, DE_CIRC, DE_PERC, DE_DLR,  DE_RPRN, _______, _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,
+[_SYM] = LAYOUT_planck_grid(
+    DE_EURO, DE_LCBR, DE_BSLS, DE_ASTR, DE_AMPR, DE_RCBR, _______, _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,
+    DE_PARA,  DE_LPRN, DE_CIRC, DE_PERC, DE_DLR,  DE_RPRN, _______, _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,
     _______, DE_LBRC, DE_HASH, DE_AT,   DE_EXLM, DE_RBRC, _______, SYMOVLY, KC_F1,   KC_F2,   KC_F3,   KC_F4,
     _______, _______, _______, _______, DE_DOT,  DE_PIPE, _______, _______, _______, _______, _______, _______
 ),
@@ -148,10 +148,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_NUM] = LAYOUT_planck_grid(
-    _______, _______, _______, _______, _______, KC_PSLS, DE_7, DE_8,    DE_9,    KC_PAST, _______,
-    _______, _______, _______, _______, _______, KC_PDOT, DE_4, DE_5,    DE_6,    KC_PMNS, _______,
-    _______, _______, _______, NUMOVLY, _______, KC_PCMM, DE_1, DE_2,    DE_3,    KC_PPLS, _______,
-    _______, _______, _______, _______, _______, _______, DE_0, KC_PEQL, _______, _______, _______
+    _______, _______, _______, _______, _______, _______, KC_PSLS, DE_7, DE_8,    DE_9,    KC_PAST, _______,
+    _______, _______, _______, _______, _______, _______, KC_PDOT, DE_4, DE_5,    DE_6,    KC_PMNS, _______,
+    _______, _______, _______, _______, NUMOVLY, _______, KC_PCMM, DE_1, DE_2,    DE_3,    KC_PPLS, _______,
+    _______, _______, _______, _______, _______, _______, _______, DE_0, KC_PEQL, _______, _______, _______
 ),
 
 /* Num-Overlay
@@ -166,10 +166,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_NUM_OVLY] = LAYOUT_planck_grid(
-    _______, _______, _______, _______, _______, DE_LCBR, DE_AMPR, DE_AST,  DE_BSLS, DE_RCBR, DE_RING,
-    _______, _______, _______, _______, _______, DE_LPRN, DE_DLR,  DE_PERC, DE_CIRC, DE_RPRN, _______,
-    _______, _______, _______, _______, _______, DE_LBRC, DE_EXLM, DE_AT,   DE_HASH, DE_RBRC, _______,
-    _______, _______, _______, _______, _______, _______, DE_PIPE, DE_DOT,  _______, _______, _______
+    _______, _______, _______, _______, _______, _______, DE_LCBR, DE_AMPR, DE_ASTR,  DE_BSLS, DE_RCBR, DE_RING,
+    _______, _______, _______, _______, _______, _______, DE_LPRN, DE_DLR,  DE_PERC, DE_CIRC, DE_RPRN, _______,
+    _______, _______, _______, _______, _______, _______, DE_LBRC, DE_EXLM, DE_AT,   DE_HASH, DE_RBRC, _______,
+    _______, _______, _______, _______, _______, _______, _______, DE_PIPE, DE_DOT,  _______, _______, _______
 ),
 /* Adjust (Lower + Raise)
  * ,-----------------------------------------------------------------------------------.
@@ -308,8 +308,8 @@ void matrix_scan_user(void) {
 
 bool music_mask_user(uint16_t keycode) {
   switch (keycode) {
-    case RAISE:
-    case LOWER:
+    case SYMLYR:
+    case NUMLYR:
       return false;
     default:
       return true;
