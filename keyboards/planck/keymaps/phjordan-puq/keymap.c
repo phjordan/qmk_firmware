@@ -28,6 +28,8 @@
 
 extern keymap_config_t keymap_config;
 
+/* Based on default - change _NUM replaces LOWER, _SYM replaces RAISE
+ * */
 enum planck_layers {
   _ADNW_PUQ,
   _UMLAUT,
@@ -45,6 +47,10 @@ enum planck_keycodes {
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
+// #define SYM MO(_SYM)
+// #define NUM MO(_NUM)
+#define SYMOVLY MO(_SYM_OVLY)
+#define NUMOVLY MO(_NUM_OVLY)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -95,81 +101,81 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Sym
  * ,-----------------------------------------------------------------------------------.
- * | Tab  |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  | Bksp |
+ * |     |  {   |   \  |   *  |   &  |   }  |      |      |  f9  |  f10 | f11  | f12  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Esc  |   A  |   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |   O  |  "   |
+ * |  §   |  (   |   ^  |   %  |   $  |   )  |      |      |  f5  |  f6  | f7   | f8   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
+ * |      |  [   |   #  |   @  |   !  |   ]  |      | OVLY |  f1  |  f2  | f3   | f4   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Brite| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+ * |      |      |      |      |   .  |   |  |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_SYM] = LAYOUT_planck_grid(
-    KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
-    KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
-    BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+[_SYM] = LAYOUT_planck_grid
+    DE_EUR,  DE_LCBR, DE_BSLS, DE_ASTR, DE_AMPR, DE_RCBR, _______, _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,
+    DE_ESC,  DE_LPRN, DE_CIRC, DE_PERC, DE_DLR,  DE_RPRN, _______, _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,
+    _______, DE_LBRC, DE_HASH, DE_AT,   DE_EXLM, DE_RBRC, _______, SYMOVLY, KC_F1,   KC_F2,   KC_F3,   KC_F4,
+    _______, _______, _______, _______, DE_DOT,  DE_PIPE, _______, _______, _______, _______, _______, _______
 ),
 
-/* Sym-Overlay
+/* Sym Overlay
  * ,-----------------------------------------------------------------------------------.
- * | Tab  |   "  |   ,  |   .  |   P  |   Y  |   F  |   G  |   C  |   R  |   L  | Bksp |
+ * |      |  ´   |   ?  |   +  |   ~  |      |      |      |      |      |      |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Esc  |   A  |   O  |   E  |   U  |   I  |   D  |   H  |   T  |   N  |   S  |  /   |
+ * |      |  "   |   <  |   >  |   =  |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |Enter |
+ * |      |  `   |   3  |   2  |   1  |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Brite| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+ * |      |      |      |      |   :  |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_SYM_OVLY] = LAYOUT_planck_grid(
-    KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC,
-    KC_ESC,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_SLSH,
-    KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_ENT ,
-    BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    _______, DE_ACUT,       DE_QST,  DE_PLUS, DE_TILD, _______, _______, _______, _______, _______, _______, _______,
+    _______, DE_DQOT,       DE_LESS, DE_MORE, DE_EQL,  _______, _______, _______, _______, _______, _______, _______,
+    _______, LSFT(DE_ACUT), DE_3   , DE_2,    DE_1   , _______, _______, _______, _______, _______, _______, _______,
+    _______, _______,       _______, _______, DE_COLN, _______, _______, _______, _______, _______, _______, _______
 ),
+
 
 /* Num
  * ,-----------------------------------------------------------------------------------.
- * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Bksp |
+ * |      |      |      |      |      |      |  /   |  7   |  8   |  9   |  *   |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |   _  |   +  |   {  |   }  |  |   |
+ * |      |      |      |      |      |      |  .   |  4   |  5   |  6   |  -   |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO ~ |ISO | | Home | End  |      |
+ * |      |      |      |      | OVLY |      |  ,   |  1   |  2   |  3   |  +   |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |      |      |  0   |  =   |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_NUM] = LAYOUT_planck_grid(
-    DE_TILD, DE_EXLM, DE_AT,   DE_HASH, DE_DLR,  DE_PERC, DE_RING, DE_AMPR,    DE_ASTR,    DE_LPRN, DE_RPRN, KC_BSPC,
-    KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   DE_UNDS,    DE_PLUS,    DE_LCBR, DE_RCBR, DE_PIPE,
-    _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  S(KC_NUHS), S(KC_NUBS), KC_HOME, KC_END,  _______,
-    _______, _______, _______, _______, _______, _______, _______, _______,    KC_MNXT,    KC_VOLD, KC_VOLU, KC_MPLY
+    _______, _______, _______, _______, _______, KC_PSLS, DE_7, DE_8,    DE_9,    KC_PAST, _______,
+    _______, _______, _______, _______, _______, KC_PDOT, DE_4, DE_5,    DE_6,    KC_PMNS, _______,
+    _______, _______, _______, NUMOVLY, _______, KC_PCMM, DE_1, DE_2,    DE_3,    KC_PPLS, _______,
+    _______, _______, _______, _______, _______, _______, DE_0, KC_PEQL, _______, _______, _______
 ),
 
 /* Num-Overlay
  * ,-----------------------------------------------------------------------------------.
- * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
+ * |      |      |      |      |      |      |  {   |  &   |  *   |  \   |  }   |  °   |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |   -  |   =  |   [  |   ]  |  \   |
+ * |      |      |      |      |      |      |  (   |  $   |  %   |  ^   |  )   |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO # |ISO / |Pg Up |Pg Dn |      |
+ * |      |      |      |      |      |      |  [   |  !   |  @   |  #   |  ]   |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |      |      |  |   |  .   |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_NUM_OVLY] = LAYOUT_planck_grid(
-    DE_GRV,  DE_1,    DE_2,    DE_3,    DE_4,    DE_5,    DE_6,    DE_7,    DE_8,    DE_9,    DE_0,    KC_BSPC,
-    KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   DE_MINS, DE_EQL,  DE_LBRC, DE_RBRC, DE_BSLS,
-    _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+    _______, _______, _______, _______, _______, DE_LCBR, DE_AMPR, DE_AST,  DE_BSLS, DE_RCBR, DE_RING,
+    _______, _______, _______, _______, _______, DE_LPRN, DE_DLR,  DE_PERC, DE_CIRC, DE_RPRN, _______,
+    _______, _______, _______, _______, _______, DE_LBRC, DE_EXLM, DE_AT,   DE_HASH, DE_RBRC, _______,
+    _______, _______, _______, _______, _______, _______, DE_PIPE, DE_DOT,  _______, _______, _______
 ),
-
 /* Adjust (Lower + Raise)
  * ,-----------------------------------------------------------------------------------.
  * |      | Reset|      |      |      |      |      |      |      |      |      |  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |      |      |Aud on|Audoff|AGnorm|AGswap|Qwerty|Colemk|Dvorak|Plover|      |
+ * |      |      |      |Aud on|Audoff|AGnorm|AGswap|Qwerty|      |      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -233,7 +239,7 @@ uint16_t muse_tempo = 50;
 
 void encoder_update(bool clockwise) {
   if (muse_mode) {
-    if (IS_LAYER_ON(_RAISE)) {
+    if (IS_LAYER_ON(_SYM)) {
       if (clockwise) {
         muse_offset++;
       } else {
