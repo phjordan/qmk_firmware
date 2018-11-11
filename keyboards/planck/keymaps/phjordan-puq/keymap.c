@@ -33,6 +33,8 @@ extern keymap_config_t keymap_config;
 enum planck_layers {
   _ADNW_PUQ,
   _UMLAUT,
+  _LFTSHIFT,
+  _RGTSHIFT,
   _SYM,
   _SYM_OVLY,
   _NUM,
@@ -69,14 +71,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Bottom row held
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      | NUM  |LSHFT | NAV  |  FN  |RSHFT |  SYM |      |      |      |
+ * |      |      |      | NUM  |LSHFT | NAV  |  FN  |RSHFT |  SYM | Alt  | GUI  | Ctrl |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADNW_PUQ] = LAYOUT_planck_grid(
     OSM(MOD_LCTL | MOD_LALT), DE_P,    DE_U,    OSL(_UMLAUT), DE_COMM,              DE_Q,    DE_G,   DE_C,                DE_L,   DE_M,    DE_F,  OSM(MOD_RCTL | MOD_RGUI),
     OSM(MOD_LSFT | MOD_LALT), DE_H,    DE_I,    DE_E,         DE_A,                 DE_O,    DE_D,   DE_T,                DE_R,   DE_N,    DE_S,  OSM(MOD_RSFT | MOD_RGUI),
     OSM(MOD_LSFT),            DE_K,    DE_Y,    DE_DOT,       DE_QUOT,              DE_X,    DE_J,   DE_V,                DE_W,   DE_B,    DE_Z,  OSM(MOD_RCTL | MOD_RSFT),
-    OSM(MOD_LCTL),            KC_LGUI, KC_LALT, NUMLYR,       MT(MOD_LSFT,KC_BSPC), KC_TAB,  KC_ENT, MT(MOD_RSFT,KC_SPC), SYMLYR, KC_DOWN, KC_UP, KC_RGHT
+    OSM(MOD_LCTL),            KC_LGUI, KC_LALT, NUMLYR,       MT(MOD_LSFT,KC_BSPC), KC_TAB,  KC_ENT, MT(MOD_RSFT,KC_SPC), SYMLYR, MT(MOD_LALT,KC_DOWN), MT(MOD_RGUI,KC_UP), MT(MOD_RCTL,KC_RGHT)
 ),
 
 
