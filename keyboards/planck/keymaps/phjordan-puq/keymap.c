@@ -35,6 +35,7 @@ enum planck_layers {
   _UMLAUT,
   _LFTSHIFT,
   _RGTSHIFT,
+  _SHFTUMLAUT,
   _SYM,
   _SYM_OVLY,
   _NUM,
@@ -57,6 +58,7 @@ enum planck_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /*Qwerty umgeschieben als adnw puq - für deutsches os tastaturlayout*/
+
 /* Adnw-puq Tapped 
  * ,--------------------------------------------------------------------------------------.
  * |(^Alt) |   P  |   U  | UML  |   ,  |   Q  |   G  |   C  |   L  |   M  |   F  |(^GUI)  |
@@ -75,14 +77,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADNW_PUQ] = LAYOUT_planck_grid(
-    OSM(MOD_LCTL | MOD_LALT), DE_P,    DE_U,    OSL(_UMLAUT), DE_COMM,              DE_Q,    DE_G,   DE_C,                DE_L,   DE_M,    DE_F,  OSM(MOD_RCTL | MOD_RGUI),
-    OSM(MOD_LSFT | MOD_LALT), DE_H,    DE_I,    DE_E,         DE_A,                 DE_O,    DE_D,   DE_T,                DE_R,   DE_N,    DE_S,  OSM(MOD_RSFT | MOD_RGUI),
-    OSM(MOD_LSFT),            DE_K,    DE_Y,    DE_DOT,       DE_QUOT,              DE_X,    DE_J,   DE_V,                DE_W,   DE_B,    DE_Z,  OSM(MOD_RCTL | MOD_RSFT),
-    OSM(MOD_LCTL),            KC_LGUI, KC_LALT, NUMLYR,       MT(MOD_LSFT,KC_BSPC), KC_TAB,  KC_ENT, MT(MOD_RSFT,KC_SPC), SYMLYR, MT(MOD_LALT,KC_DOWN), MT(MOD_RGUI,KC_UP), MT(MOD_RCTL,KC_RGHT)
+    OSM(MOD_LCTL | MOD_LALT), DE_P,          DE_U,          OSL(_UMLAUT), DE_COMM,               DE_Q,    DE_G,   DE_C,                 DE_L,   DE_M,                 DE_F,               OSM(MOD_RCTL | MOD_RGUI),
+    OSM(MOD_LSFT | MOD_LALT), DE_H,          DE_I,          DE_E,         DE_A,                  DE_O,    DE_D,   DE_T,                 DE_R,   DE_N,                 DE_S,               OSM(MOD_RSFT | MOD_RGUI),
+    OSM(MOD_LSFT),            DE_K,          DE_Y,          DE_DOT,       DE_QUOT,               DE_X,    DE_J,   DE_V,                 DE_W,   DE_B,                 DE_Z,               OSM(MOD_RCTL | MOD_RSFT),
+    OSM(MOD_LCTL),            OSM(MOD_LGUI), OSM(MOD_LALT), NUMLYR,       LT(_LFTSHIFT,KC_BSPC), KC_TAB,  KC_ENT, LT(_RGTSHIFT,KC_SPC), SYMLYR, MT(MOD_LALT,KC_DOWN), MT(MOD_RGUI,KC_UP), MT(MOD_RCTL,KC_RGHT)
 ),
 
 
-/*Qwerty umgeschieben als adnw puq - für deutsches os tastaturlayout*/
 /* Umlaut 
  * ,-----------------------------------------------------------------------------------.
  * |      |      |   Ü  |      |      |      |      |      |      |      |      |      |
@@ -100,6 +101,73 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
     _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______
 ),
+
+/* Left shift layer
+ * ,--------------------------------------------------------------------------------------.
+ * |       |   P  |   U  | UML  |   ;  |   Q  |   G  |   C  |   L  |   M  |   F  |        |
+ * |-------+------+------+------+------+-------------+------+------+------+------+--------|
+ * |       |   H  |   I  |   E  |   A  |   O  |   D  |   T  |   R  |   N  |   S  |        |
+ * |-------+------+------+------+------+------|------+------+------+------+------+--------|
+ * |       |   K  |   Y  |   :  |   #  |   X  |   J  |   V  |   W  |   B  |   Z  |        |
+ * |-------+------+------+------+------+------+------+------+------+------+------+--------|
+ * |       |      |      |      |      |S-Tab |      |   -  | Left | Down |  Up  | Right  |
+ * `--------------------------------------------------------------------------------------'
+ */
+
+/* Bottom row held
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_LFTSHIFT] = LAYOUT_planck_grid(
+    _______, LSFT(DE_P), LSFT(DE_U), OSL(_SHFTUMLAUT), LSFT(DE_COMM), LSFT(DE_Q),   LSFT(DE_G), LSFT(DE_C), LSFT(DE_L), LSFT(DE_M), LSFT(DE_F), _______,
+    _______, LSFT(DE_H), LSFT(DE_I), LSFT(DE_E),       LSFT(DE_A),    LSFT(DE_O),   LSFT(DE_D), LSFT(DE_T), LSFT(DE_R), LSFT(DE_N), LSFT(DE_S), _______,
+    _______, LSFT(DE_K), LSFT(DE_Y), LSFT(DE_DOT),     DE_HASH,       LSFT(DE_X),   LSFT(DE_J), LSFT(DE_V), LSFT(DE_W), LSFT(DE_B), LSFT(DE_Z), _______,
+    _______, _______,    _______,    _______,          _______,       LSFT(KC_TAB), _______,    DE_MINS,    KC_LEFT,    KC_DOWN,    KC_UP,      KC_RGHT
+),
+
+/* Right shift layer
+ * ,--------------------------------------------------------------------------------------.
+ * |       |   P  |   U  | UML  |   ;  |   Q  |   G  |   C  |   L  |   M  |   F  |        |
+ * |-------+------+------+------+------+-------------+------+------+------+------+--------|
+ * |       |   H  |   I  |   E  |   A  |   O  |   D  |   T  |   R  |   N  |   S  |        |
+ * |-------+------+------+------+------+------|------+------+------+------+------+--------|
+ * |       |   K  |   Y  |   :  |   #  |   X  |   J  |   V  |   W  |   B  |   Z  |        |
+ * |-------+------+------+------+------+------+------+------+------+------+------+--------|
+ * |       |      |      |      |   _  |S-Tab |      |      |      |      |      |        |
+ * `--------------------------------------------------------------------------------------'
+ */
+
+/* Bottom row held
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_RGTSHIFT] = LAYOUT_planck_grid(
+    _______, RSFT(DE_P), RSFT(DE_U), OSL(_SHFTUMLAUT), RSFT(DE_COMM), RSFT(DE_Q),   RSFT(DE_G), RSFT(DE_C), RSFT(DE_L), RSFT(DE_M), RSFT(DE_F), _______,
+    _______, RSFT(DE_H), RSFT(DE_I), RSFT(DE_E),       RSFT(DE_A),    RSFT(DE_O),   RSFT(DE_D), RSFT(DE_T), RSFT(DE_R), RSFT(DE_N), RSFT(DE_S), _______,
+    _______, RSFT(DE_K), RSFT(DE_Y), RSFT(DE_DOT),     DE_HASH,       RSFT(DE_X),   RSFT(DE_J), RSFT(DE_V), RSFT(DE_W), RSFT(DE_B), RSFT(DE_Z), _______,
+    _______, _______,    _______,    _______,          RSFT(DE_MINS), RSFT(KC_TAB), _______,    _______,    _______,    _______,    _______,    _______
+),
+
+/* Shift Umlaut 
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |   Ü  |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |      |      |      |      |   Ä  |   Ö  |      |      |      |      |   ß  |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |             |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_SHFTUMLAUT] = LAYOUT_planck_grid(
+    _______,_______,LSFT(DE_UE),_______,_______,    _______,    _______,_______,_______,_______,_______,_______,
+    _______,_______,_______,    _______,LSFT(DE_AE),LSFT(DE_OE),_______,_______,_______,_______,  DE_SS,_______,
+    _______,_______,_______,    _______,_______,    _______,    _______,_______,_______,_______,_______,_______,
+    _______,_______,_______,    _______,_______,    _______,    _______,_______,_______,_______,_______,_______
+),
+
 
 /* Sym
  * ,-----------------------------------------------------------------------------------.
