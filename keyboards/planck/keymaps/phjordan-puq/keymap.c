@@ -289,6 +289,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         register_code(DE_AE);
         unregister_code(DE_AE);
         unregister_code(KC_LSFT);
+        layer_off(_SHFTUMLAUT);
       }
       return false;
       break;
@@ -298,6 +299,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         register_code(DE_OE);
         unregister_code(DE_OE);
         unregister_code(KC_LSFT);
+        layer_off(_SHFTUMLAUT);
       }
       return false;
       break;
@@ -307,6 +309,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         register_code(DE_UE);
         unregister_code(DE_UE);
         unregister_code(KC_LSFT);
+        layer_off(_SHFTUMLAUT);
       }
       return false;
       break;
