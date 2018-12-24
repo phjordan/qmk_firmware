@@ -46,6 +46,9 @@ enum planck_layers {
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
   BACKLIT,
+  LSFT_AE,
+  LSFT_OE,
+  LSFT_UE,
 };
 
 // #define LOWER MO(_LOWER)
@@ -162,16 +165,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_SHFTUMLAUT] = LAYOUT_planck_grid(
-    _______,_______,LSFT(DE_UE),_______,_______,    _______,    _______,_______,_______,_______,_______,_______,
-    _______,_______,_______,    _______,LSFT(DE_AE),LSFT(DE_OE),_______,_______,_______,_______,  DE_SS,_______,
-    _______,_______,_______,    _______,_______,    _______,    _______,_______,_______,_______,_______,_______,
-    _______,_______,_______,    _______,_______,    _______,    _______,_______,_______,_______,_______,_______
+    _______,_______,LSFT_UE,_______,_______,_______,_______,_______,_______,_______,_______,_______,
+    _______,_______,_______,_______,LSFT_AE,LSFT_OE,_______,_______,_______,_______,  DE_SS,_______,
+    _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,
+    _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______
 ),
 
 
 /* Sym
  * ,-----------------------------------------------------------------------------------.
- * |     |  {   |   \  |   *  |   &  |   }  |      |      |  f9  |  f10 | f11  | f12  |
+ * |  €   |  {   |   \  |   *  |   &  |   }  |      |      |  f9  |  f10 | f11  | f12  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |  §   |  (   |   ^  |   %  |   $  |   )  |      |      |  f5  |  f6  | f7   | f8   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -182,7 +185,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_SYM] = LAYOUT_planck_grid(
     DE_EURO, DE_LCBR, DE_BSLS, DE_ASTR, DE_AMPR, DE_RCBR, _______, _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,
-    DE_PARA,  DE_LPRN, DE_CIRC, DE_PERC, DE_DLR,  DE_RPRN, _______, _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,
+    DE_PARA, DE_LPRN, DE_CIRC, DE_PERC, DE_DLR,  DE_RPRN, _______, _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,
     _______, DE_LBRC, DE_HASH, DE_AT,   DE_EXLM, DE_RBRC, _______, SYMOVLY, KC_F1,   KC_F2,   KC_F3,   KC_F4,
     _______, _______, _______, _______, DE_DOT,  DE_PIPE, _______, _______, _______, _______, _______, _______
 ),
@@ -277,6 +280,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         print("mode just switched to qwerty and this is a huge string\n");
         set_single_persistent_default_layer(_ADNW_PUQ);
+      }
+      return false;
+      break;
+    case LSFT_AE:
+      if (record->event.pressed) {
+        register_code(KC_LSFT);
+        register_code(DE_AE);
+        unregister_code(DE_AE);
+        unregister_code(KC_LSFT);
+      }
+      return false;
+      break;
+    case LSFT_OE:
+      if (record->event.pressed) {
+        register_code(KC_LSFT);
+        register_code(DE_OE);
+        unregister_code(DE_OE);
+        unregister_code(KC_LSFT);
+      }
+      return false;
+      break;
+    case LSFT_UE:
+      if (record->event.pressed) {
+        register_code(KC_LSFT);
+        register_code(DE_UE);
+        unregister_code(DE_UE);
+        unregister_code(KC_LSFT);
       }
       return false;
       break;
