@@ -299,7 +299,7 @@
   // `-----------------------------------------------------------------------------------'
 
   [_RSHIFT] = {
-    {S(KC_Q), S(KC_Y), S(KC_O), S(KC_U), S(KC_J), CNTR_TL, CNTR_TR, S(KC_G), KC_LBRC, KC_RBRC, KC_CIRC, S(KC_X)},
+    {S(KC_Q), S(KC_Y), S(KC_O), S(KC_U), S(KC_J), CNTR_TL, CNTR_TR, S(KC_G), KC_LBRC, KC_RBRC, DE_CIRC, S(KC_X)},
     {S(KC_K), S(KC_H), S(KC_E), S(KC_A), KC_QUES, CNTR_HL, CNTR_HR, KC_PIPE, KC_LPRN, KC_RPRN, KC_DLR,  S(KC_B)},
     {S(KC_Z), TD_COLN, TD_DQOT, S(KC_I), KC_SLSH, CNTR_BL, CNTR_BR, KC_BSLS, KC_ASTR, KC_DOT,  S(KC_P), S(KC_V)},
     {OS_CTL,  OS_GUI,  OS_ALT,  KC_CAPS, KC_MINS, SL_TAB,  LT_BSPC, ___fn__, SL_LEFT, S_DOWN,  S_UP,    S_RGHT },
@@ -549,3 +549,66 @@
     {OS_CTL,  OS_GUI,  OS_ALT,  KC_TAB,  KC_MINS, LT_INS,  S_LEFT,  ___fn__, SP_BSPC, S_DOWN,  S_UP,    S_RGHT },
   },
 #endif
+
+// ................................................................... ADNW-PUQ
+#ifdef ADNWPUQ
+  // ,-----------------------------------------------------------------------------------.
+  // |   P  |   U  | UML  |   ,  |   Q  |   Fn | Caps |   G  |   C  |   L  |   M  |   F  |
+  // |------+------+------+------+------+-------------+------+------+------+------+------|
+  // |   H  |   I  |   E  |   A  |   O  |Cursor| Mouse|   D  |   T  |   R  |   N  |   S  |
+  // |------+------+------+------+------+------|------+------+------+------+------+------|
+  // |   K  |   Y  |   ". |   '  |   X  |  Num | Regex|   J  |   V  |   W  |   B  |   Z  |
+  // |------+------+------+------+------+------+------+------+------+------+------+------|
+  // | Ctrl |  GUI |  Alt |  Esc | Space|  Tab | Bksp |  Ent | Left | Down |  Up  | Right|
+  // `-----------------------------------------------------------------------------------'
+
+  [_BASE] = {
+    {DE_P,    DE_U,    UML ,    DE_COMM, DE_Q,    CNTR_TL, CNTR_TR, DE_G,    DE_C,    DE_L,    DE_M,    DE_F   },
+    {HOME_H,  HOME_I,  HOME_E,  HOME_A,  DE_O,    CNTR_HL, CNTR_HR, DE_D,    HOME_T,  HOME_R,  HOME_N,  HOME_S },
+    {DE_K,    DE_Y,    DE_DOT,  DE_QUOT, DE_X,    CNTR_BL, CNTR_BR, DE_J,    DE_V,    DE_W,    DE_B,    DE_Z   },
+    {OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  TD_SPC,  LT_TAB,  LT_BSPC, TD_ENT,  LT_LEFT, AT_DOWN, GT_UP,   CT_RGHT},
+  },
+
+  [_SHIFT] = {
+    {S(DE_P), S(DE_U), S(UML),  DE_COMM, S(DE_Q), CNTR_TL, CNTR_TR, S(DE_G), S(DE_C), S(DE_L), S(DE_M), S(DE_F)},
+    {S(DE_H), S(DE_I), S(DE_E), S(DE_A), S(DE_O), CNTR_HL, CNTR_HR, S(DE_D), S(DE_T), S(DE_R), S(DE_N), S(DE_S)},
+    {S(DE_K), S(DE_Y), DE_DOT,  DE_QUOT, S(DE_X), CNTR_BL, CNTR_BR, S(DE_J), S(DE_V), S(DE_W), S(DE_B), S(DE_Z)},
+    {OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  TD_SPC,  LT_TAB,  LT_BSPC, TD_ENT,  LT_LEFT, AT_DOWN, GT_UP,   CT_RGHT},
+  },
+
+  // ,-----------------------------------------------------------------------------------.
+  // |   P  |   $  |   {  |   }  |   J  |   Fn | Caps |   G  |   C  |   L  |   M  |   F  |
+  // |------+------+------+------+------+-------------+------+------+------+------+------|
+  // |   H  |   /  |   <  |   >  |   ~  |Cursor| Mouse|   D  |   T  |   R  |   N  |   S  |
+  // |------+------+------+------+------+------|------+------+------+------+------+------|
+  // |   K  |   :  |   !  |   =  |   `  |  Num | Regex|   J  |   V  |   W  |   B  |   Z  |
+  // |------+------+------+------+------+------+------+------+------+------+------+------|
+  // | Ctrl |  GUI |  Alt |  Esc |  f() |  Tab |  Del |   _  | Left | Down |  Up  | Right|
+  // `-----------------------------------------------------------------------------------'
+
+  [_LSHIFT] = {
+    {S(DE_P), DE_DLR,  DE_LCBR, DE_RCBR, S(DE_J), CNTR_TL, CNTR_TR, S(DE_G), S(DE_C), S(DE_L), S(DE_M), S(DE_F)},
+    {S(DE_H), DE_SLSH, TD_LT,   TD_GT,   TD_TILD, CNTR_HL, CNTR_HR, S(DE_D), S(DE_T), S(DE_R), S(DE_N), S(DE_S)},
+    {S(DE_K), DE_COLN, DE_EXLM, DE_EQL,  TD_GRV,  CNTR_BL, CNTR_BR, S(DE_J), S(DE_V), S(DE_W), S(DE_B), S(DE_Z)},
+    {OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  ___fn__, LT_TAB,  KC_DEL,  DE_UNDS, SL_LEFT, S_DOWN,  S_UP,    S_RGHT },
+  },
+
+  // ,-----------------------------------------------------------------------------------.
+  // |   P  |   U  | UML  |   ;  |   Q  |   Fn | Caps |   G  |   [  |   ]  |   ^  |   F  |
+  // |------+------+------+------+------+-------------+------+------+------+------+------|
+  // |   H  |   I  |   E  |   A  |   O  |Cursor| Mouse|   |  |   (  |   )  |   $  |   S  |
+  // |------+------+------+------+------+------|------+------+------+------+------+------|
+  // |   K  |   Y  |   ?  |   "  |   X  |  Num | Regex|   \  |   *  |   .  |   B  |   Z  |
+  // |------+------+------+------+------+------+------+------+------+------+------+------|
+  // | Ctrl |  GUI |  Alt | Esc  |   -  | ↑Tab | Bksp |  f() | Left | Down |  Up  | Right|
+  // `-----------------------------------------------------------------------------------'
+
+  [_RSHIFT] = {
+    {S(DE_P), S(DE_U),  UML,     DE_SCLN, S(DE_Q), CNTR_TL, CNTR_TR, S(DE_G), DE_LBRC, DE_RBRC, DE_CIRC, S(DE_F)},
+    {S(DE_H), S(DE_I),  S(DE_E), S(DE_A), S(DE_O), CNTR_HL, CNTR_HR, DE_PIPE, DE_LPRN, DE_RPRN, DE_DLR,  S(DE_B)},
+    {S(DE_K), S_(DE_Y), DE_QST,  DE_DQOT, S(DE_X), CNTR_BL, CNTR_BR, DE_BSLS, DE_ASTR, DE_DOT,  S(DE_B), S(DE_Z)},
+    {OS_CTL,  OS_GUI,   OS_ALT,  LT_ESC,  DE_MINS, SL_TAB,  LT_BSPC, ___fn__, SL_LEFT, S_DOWN,  S_UP,    S_RGHT },
+  },
+#endif
+
+
