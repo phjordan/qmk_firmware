@@ -233,10 +233,24 @@ enum planck_keycodes {
 #define EOT     LCTL(KC_D)
 #define NAK     LCTL(KC_U)
 #define PASTE   LCTL(KC_V)
+// German AdNW
+#ifdef ADNWPUQ
+#define UNDO LCTL(DE_Z)
+#else
 #define UNDO    LCTL(KC_Z)
+#endif
+// End AdNW block
 #define TMCOPY  LALT(LCTL(KC_C))
 #define TMPASTE LALT(LCTL(KC_V))
+// German AdNW
+#ifdef ADNWPUQ
+#define LT_BSLS LT  (_MOUSE,  DE_BSLS)      // see process_record_user() for extended handling
+#define LT_ALTG LT  (_FNCKEY, DE_ALGR)
+#else
 #define LT_BSLS LT  (_MOUSE,  KC_BSLS)      // see process_record_user() for extended handling
+#define LT_ALTG LT  (_FNCKEY, KC_RALT)
+#endif
+// End of AdNW Block
 #define LT_BSPC LT  (_EDIT,   KC_BSPC)
 #define SP_LEFT LT  (_EDIT,   KC_LEFT)
 #define LT_ESC  LT  (_NUMBER, KC_ESC)
@@ -244,7 +258,6 @@ enum planck_keycodes {
 #define SP_BSPC LT  (_SYMBOL, KC_BSPC)      // see process_record_user() for extended handling
 #define LT_TAB  LT  (_FNCKEY, KC_TAB)
 #define LT_INS  LT  (_FNCKEY, KC_INS)
-#define LT_ALTG LT  (_FNCKEY, KC_RALT)
 #define ADJUST  MO  (_ADJUST)
 #define OS_ALT  OSM (MOD_LALT)
 #define OS_CTL  OSM (MOD_LCTL)
@@ -255,10 +268,13 @@ enum planck_keycodes {
 #define OS_CSFT OSM (MOD_LSFT | MOD_LCTL)
 #define OS_SALT OSM (MOD_LALT | MOD_LSFT)
 #define OS_SGUI OSM (MOD_LGUI | MOD_LSFT)
+// German AdNW
 #ifdef ADNWPUQ
 #define OS_UML    OSL (_UMLAUT)
 #define OS_SFTUML OSL (_SHIFTUMLAUT)
 #endif
+// End of AdNW Block
+#define LT_BSPC LT  (_EDIT,   KC_BSPC)
 
 #ifdef CENTER_TT
 #ifdef BEAKLSP
@@ -281,10 +297,17 @@ enum planck_keycodes {
 #endif
 
 #ifdef THUMB_0
+// German AdNW
+#ifdef ADNWPUQ
+#define LT_EQL  LT  (_ADJUST, DE_EQL)
+#else
 #define LT_EQL  LT  (_ADJUST, KC_EQL)
+#endif
+// End of AdNW Block
 #else
 #define LT_0    LT  (_ADJUST, KC_0)
 #endif
+
 #ifndef SHIFT_SYMBOLS
 #define LT_A    LT  (_NUMSYM, KC_A)
 #define LT_LFTX LT  (_SYMREG, KC_LEFT)
