@@ -77,14 +77,23 @@
 #include "audio.h"
 #endif
 #include "eeconfig.h"
+#ifdef ADNWPUQ
+#include "keymap_german.h"
+#endif
 
 extern keymap_config_t keymap_config;
 
 enum planck_layers {
   _BASE = 0
+#ifdef ADNWPUQ
+ ,_UMLAUT
+#endif
  ,_SHIFT
  ,_LSHIFT
  ,_RSHIFT
+#ifdef ADNWPUQ
+ ,_SHIFTUMLAUT
+#endif
  ,_PLOVER
  ,_NUMBER
  ,_SYMBOL
@@ -137,6 +146,11 @@ enum planck_keycodes {
  ,LT_M    = LT (_SYMBOL, KC_M)
 #endif
  ,PS_BASE
+#ifdef ADNWPUQ
+ ,S_AE
+ ,S_OE
+ ,S_UE
+#endif
 };
 
 // modifier keys
@@ -149,11 +163,23 @@ enum planck_keycodes {
 #define MT_X    MT   (MOD_LALT | MOD_LSFT, KC_X)
 #define ST_A    SFT_T(KC_A)
 #ifdef HOME_MODS
+#if defined(ADNWPUQ)
+#define HOME_H  CTL_T(DE_H)
+#define HOME_I  GUI_T(DE_I)
+#define HOME_E  ALT_T(DE_E)
+#define HOME_A  SFT_T(DE_A)
+#else
 #define HOME_K  CTL_T(KC_K)
 #define HOME_H  GUI_T(KC_H)
 #define HOME_E  ALT_T(KC_E)
 #define HOME_A  SFT_T(KC_A)
-#if defined(BEAKLMU) || defined(BEAKLSP)
+#endif
+#if defined(ADNWPUQ)
+#define HOME_T  SFT_T(DE_T)
+#define HOME_R  ALT_T(DE_R)
+#define HOME_N  GUI_T(DE_N)
+#define HOME_S  CTL_T(DE_S)
+#elif defined(BEAKLMU) || defined(BEAKLSP)
 #define HOME_T  SFT_T(KC_T)
 #define HOME_R  ALT_T(KC_R)
 #define HOME_S  GUI_T(KC_S)
@@ -165,6 +191,16 @@ enum planck_keycodes {
 #define HOME_B  CTL_T(KC_B)
 #endif
 #else
+#if defined(ADNWPUQ)
+#define HOME_H  DE_H
+#define HOME_I  DE_I
+#define HOME_E  DE_E
+#define HOME_A  DE_A
+#define HOME_T  DE_T
+#define HOME_R  DE_R
+#define HOME_N  DE_N
+#define HOME_S  DE_S
+#else
 #define HOME_K  KC_K
 #define HOME_H  KC_H
 #define HOME_E  KC_E
@@ -173,6 +209,7 @@ enum planck_keycodes {
 #define HOME_S  KC_S
 #define HOME_N  KC_N
 #define HOME_B  KC_B
+#endif
 #endif
 
 #define S_DOWN  S    (KC_DOWN)
@@ -218,6 +255,10 @@ enum planck_keycodes {
 #define OS_CSFT OSM (MOD_LSFT | MOD_LCTL)
 #define OS_SALT OSM (MOD_LALT | MOD_LSFT)
 #define OS_SGUI OSM (MOD_LGUI | MOD_LSFT)
+#ifdef ADNWPUQ
+#define OS_UML    OSL (_UMLAUT)
+#define OS_SFTUML OSL (_SHIFTUMLAUT)
+#endif
 
 #ifdef CENTER_TT
 #ifdef BEAKLSP
@@ -316,10 +357,39 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
         base_n = base_n & ~BASE_2;
       }
       return false;
+#ifdef ADNWPUQ
+    case S_AE:
+      if (record->event.pressed){
+          register_code(KC_LSFT);
+          register_code(DE_AE);
+          unregister_code(DE_AE);
+          unregister_code(KC_LSFT);
+          // layer_off(_SHIFTUMLAUT);
+      }
+      break;
+    case S_OE:
+      if (record->event.pressed){
+          register_code(KC_LSFT);
+          register_code(DE_OE);
+          unregister_code(DE_OE);
+          unregister_code(KC_LSFT);
+          // layer_off(_SHIFTUMLAUT);
+      }
+      break;
+    case S_UE:
+      if (record->event.pressed){
+          register_code(KC_LSFT);
+          register_code(DE_UE);
+          unregister_code(DE_UE);
+          unregister_code(KC_LSFT);
+          // layer_off(_SHIFTUMLAUT);
+      }
+      break;
+#endif
     case AT_DOWN:
 #ifdef HOME_MODS
     case HOME_E:
-#if defined(BEAKLMU) || defined(BEAKLSP)
+#if defined(BEAKLMU) || defined(BEAKLSP) || defined(ADNWPUQ)
     case HOME_R:
 #else
     case HOME_S:
@@ -329,8 +399,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
       break;
     case CT_RGHT:
 #ifdef HOME_MODS
+#if defined(ADNWPUQ)
+    case HOME_H:
+#else
     case HOME_K:
-#if defined(BEAKLMU) || defined(BEAKLSP)
+#endif
+#if defined(ADNWPUQ)
+    case HOME_S:
+#elif defined(BEAKLMU) || defined(BEAKLSP)
     case HOME_W:
 #else
     case HOME_B:
@@ -340,7 +416,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
       break;
     case GT_UP:
 #ifdef HOME_MODS
+#if defined(ADNWPUQ)
+    case HOME_I:
+#else
     case HOME_H:
+#endif
 #if defined(BEAKLMU) || defined(BEAKLSP)
     case HOME_S:
 #else
