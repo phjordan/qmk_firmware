@@ -39,9 +39,10 @@
 #define IGNORE_MOD_TAP_INTERRUPT
 
 // layout ADNW*, BEAKL*, COLEKA*, QWERTY (default)
-#define BEAKLSP
+//#define BEAKLSP
+#define ADNWPUQ
 
 // sync app with window manager keybind hook defined in plover_keybind.h
-#define PLOVER_KEYBIND
+//#define PLOVER_KEYBIND
 
 #endif
