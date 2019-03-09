@@ -58,7 +58,7 @@
 
   [_TTREGEX] = LAYOUT_planck_grid(
     ___x___, DE_TILD, DE_LCBR, DE_RCBR, DE_AMPR, ___x___, ___x___, DE_PERC, DE_LBRC, DE_RBRC, DE_AT,   ___x___,
-    ___x___, DE_CIRC, DE_LESS, DE_MORE, DE_QUES, ___x___, ___x___, DE_PIPE, DE_LPRN, DE_RPRN, DE_DLR,  ___x___,
+    ___x___, DE_CIRC, DE_LESS, DE_MORE, DE_QST,  ___x___, ___x___, DE_PIPE, DE_LPRN, DE_RPRN, DE_DLR,  ___x___,
     ___x___, DE_COLN, DE_EXLM, DE_EQL,  DE_SLSH, ___x___, ___x___, DE_BSLS, DE_ASTR, DE_DOT,  DE_HASH, ___x___,
     _______, _______, _______, _______, TT_ESC,  DE_MINS, DE_PLUS, KC_SPC,  _______, _______, _______, _______
   ),

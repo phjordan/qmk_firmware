@@ -623,7 +623,7 @@
   [_RSHIFT] = LAYOUT_planck_grid(
     S(DE_P), S(DE_U),  OS_SFTUML, DE_SCLN, S(DE_Q), CNTR_TL, CNTR_TR, S(DE_G), DE_LBRC, DE_RBRC, DE_CIRC, S(DE_F),
     S(DE_H), S(DE_I),  S(DE_E),   S(DE_A), S(DE_O), CNTR_HL, CNTR_HR, DE_PIPE, DE_LPRN, DE_RPRN, DE_DLR,  S(DE_B),
-    S(DE_K), S_(DE_Y), DE_QST,    DE_DQOT, S(DE_X), CNTR_BL, CNTR_BR, DE_BSLS, DE_ASTR, DE_DOT,  S(DE_B), S(DE_Z),
+    S(DE_K), S(DE_Y), DE_QST,    DE_DQOT, S(DE_X), CNTR_BL, CNTR_BR, DE_BSLS, DE_ASTR, DE_DOT,  S(DE_B), S(DE_Z),
     OS_CTL,  OS_GUI,   OS_ALT,    LT_ESC,  DE_MINS, SL_TAB,  LT_BSPC, ___fn__, SL_LEFT, S_DOWN,  S_UP,    S_RGHT 
   ),
 
